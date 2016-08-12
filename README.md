@@ -99,7 +99,7 @@ $ 21 buy 'http://0.0.0.0:11016/tm8gnm6bshpujmeeejff'
 
 Index a document on a different index.
 ```
-$ 21 buy url 'http://0.0.0.0:11016/or48wn8hobbjkyu0j47r/tweet' -d '{ "user" : "kimchy", "post_date" : "2009-11-15T14:12:12", "message" : "trying out Elasticsearch"}' --request POST
+$ 21 buy 'http://0.0.0.0:11016/or48wn8hobbjkyu0j47r/tweet' -d '{ "user" : "kimchy", "post_date" : "2009-11-15T14:12:12", "message" : "trying out Elasticsearch"}' --request POST
 {
     "result": {
         "_index": "or48wn8hobbjkyu0j47r",
