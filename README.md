@@ -22,6 +22,11 @@ $ cd ElasticsearchE16
 $ ./setup.sh
 ```
 
+### Set up ES docker image
+```
+$ docker run -d -v /your/path/elastic/data/: /your/path/elasticsearch/data elasticsearch -Des.node.name=Ubuntu1 -Des.cluster.name=SearchE16
+```
+
 Next, start up the server:
 ```
 $ python3 elasticsearchE16-server.py -d
@@ -36,7 +41,7 @@ The following shows how to set up and use an index against the service using the
 
 Create an index.
 ```
-$ 21 buy url 'http://0.0.0.0:11016/indexes' --request POST
+$ 21 buy 'http://0.0.0.0:11016/indexes' --request POST
 {
     "expired": false,
     "indexExpireDisplay": "Tue Sep  6 18:04:49 2016",
@@ -49,7 +54,7 @@ See the 'indexId' that is returned.  This will be used on subsequent calls.
 
 Check index status.
 ```
-$ 21 buy url 'http://0.0.0.0:11016/tm8gnm6bshpujmeeejff'
+$ 21 buy 'http://0.0.0.0:11016/tm8gnm6bshpujmeeejff'
 {
     "expired": false,
     "indexExpireDisplay": "Tue Sep  6 18:04:49 2016",
@@ -62,7 +67,7 @@ See that it is not yet expired and it shows you the expire date in the future.
 
 Renew for 30 extra days.
 ```
-$ 21 buy url 'http://0.0.0.0:11016/tm8gnm6bshpujmeeejff' --request PUT
+$ 21 buy 'http://0.0.0.0:11016/tm8gnm6bshpujmeeejff' --request PUT
 {
     "expired": false,
     "indexExpireDisplay": "Thu Oct  6 18:04:49 2016",
@@ -75,7 +80,7 @@ See that the expire date went from Sept to Oct.
 
 Delete the index.
 ```
-$ 21 buy url 'http://0.0.0.0:11016/tm8gnm6bshpujmeeejff' --request DELETE
+$ 21 buy 'http://0.0.0.0:11016/tm8gnm6bshpujmeeejff' --request DELETE
 {
     "indexId": "tm8gnm6bshpujmeeejff",
     "message": "Index tm8gnm6bshpujmeeejff deleted.",
@@ -85,7 +90,7 @@ $ 21 buy url 'http://0.0.0.0:11016/tm8gnm6bshpujmeeejff' --request DELETE
 
 Verify it is deleted.
 ```
-$ 21 buy url 'http://0.0.0.0:11016/tm8gnm6bshpujmeeejff'
+$ 21 buy 'http://0.0.0.0:11016/tm8gnm6bshpujmeeejff'
 {
     "error": "Index was previously deleted.",
     "success": false
@@ -115,7 +120,7 @@ See that the document ID is returned.
 
 Search for that document.
 ```
-$ 21 buy url 'http://0.0.0.0:11016/or48wn8hobbjkyu0j47r/tweet/_search' -d '{"query" : { "term" : { "user" : "kimchy" } }}' --request POST
+$ 21 buy 'http://0.0.0.0:11016/or48wn8hobbjkyu0j47r/tweet/_search' -d '{"query" : { "term" : { "user" : "kimchy" } }}' --request POST
 {
     "result": {
         "_shards": {
